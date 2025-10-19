@@ -61,119 +61,21 @@
     .flag{height:28px;min-width:42px;border-radius:6px;background:#fff;border:1px solid #fff;cursor:pointer;padding:2px 8px}
     .flag.active{background:var(--accent);color:#fff;border-color:var(--accent)}
 
-    /* HERO like the screenshot */
-    .hero{background:#CE1126}
-    .hero-wrap{padding:96px 0 60px; text-align:center}
-    .hero h1 {
-      font-weight: 900;
-      letter-spacing: -0.5px;
-      line-height: 0.95;
-      margin: 0 auto 18px;
-      color: #fff;
-      font-size: clamp(32px, 6vw, 72px); /* reduced from clamp(42px, 8vw, 96px) */
-      max-width: 900px; /* reduced from 1100px */
-    }
-    .hero p {
-      font-size: clamp(14px, 1.6vw, 22px); /* reduced from clamp(16px, 2.2vw, 30px) */
-      color: #fff;
-      margin: 0 auto;
-      max-width: 850px; /* reduced from 1050px */
-    }
-    .badges {
-      gap: 14px; /* reduced from 18px */
-      margin-top: 18px; /* reduced from 26px */
-    }
-    .badge {
-      padding: 10px 18px; /* reduced from 14px 22px */
-      font-size: 1rem; /* add for more refined look */
-      background: rgba(255,255,255,0.08);
-      color: #fff;
-      border: 1px solid #fff2;
-      border-radius: 999px;
-      transition: background 0.2s, color 0.2s, border 0.2s;
-      box-shadow: 0 2px 8px rgba(0,0,0,0.08);
-    }
-    .badge:hover {
-      background: #fff;
-      color: #CE1126;
-      border-color: #fff;
-    }
-
-    /* Hero (restored previous style) */
-    .hero {
-      background: var(--accent);
-    }
-    .hero-wrap {
-      display: grid;
-      grid-template-columns: 1fr;
-      justify-items: center;
-      text-align: center;
-      padding: 92px 0 56px;
-    }
-    .hero h1 {
-      font-size: 44px;
-      margin: 0 0 14px;
-      font-weight: 800;
-      color: #fff;
-      letter-spacing: 0;
-      line-height: 1.05;
-      max-width: 900px;
-    }
-    .hero p {
-      font-size: 18px;
-      color: #fff;
-      max-width: 860px;
-      margin: 0 auto;
-    }
-    .badges {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 10px;
-      justify-content: center;
-      margin-top: 16px;
-    }
-    .badge {
-      padding: 8px 12px;
-      border-radius: 999px;
-      background: #fff;
-      color: #000;
-      font-weight: 600;
-      font-size: 13px;
-      border: 1px solid #fff;
-      transition: background 0.2s, color 0.2s, border 0.2s;
-    }
-    .badge:hover {
-      background: #000;
-      color: #fff;
-      border-color: #000;
-    }
-
-    /* Style for .btn-chip to match .badge (court-ready accuracy) */
-    .btn-chip {
-      padding: 8px 12px;
-      border-radius: 999px;
-      background: #fff;
-      color: #000;
-      font-weight: 600;
-      font-size: 13px;
-      border: 1px solid #fff;
-      transition: background 0.2s, color 0.2s, border 0.2s;
-      display: inline-flex;
-      align-items: center;
-      gap: 6px;
-      text-decoration: none;
-    }
-    .btn-chip:hover {
-      background: #000;
-      color: #fff;
-      border-color: #000;
-    }
+    /* HERO */
+    .hero{background:var(--accent)}
+    .hero-wrap{display:grid;grid-template-columns:1fr;justify-items:center;text-align:center;padding:92px 0 56px}
+    .hero h1{font-size:44px;margin:0 0 14px;font-weight:800;color:#fff;letter-spacing:0;line-height:1.05;max-width:900px}
+    .hero p{font-size:18px;color:#fff;max-width:860px;margin:0 auto}
+    .badges{display:flex;flex-wrap:wrap;gap:10px;justify-content:center;margin-top:16px}
+    .badge{padding:8px 12px;border-radius:999px;background:#fff;color:#000;font-weight:600;font-size:13px;border:1px solid #fff;transition:background .2s,color .2s,border .2s}
+    .badge:hover{background:#000;color:#fff;border-color:#000}
 
     /* Sections */
     main .section{padding:42px 0}
     .section h2{font-size:28px;margin:0 0 14px;position:relative}
     .section h2::after{content:"";display:block;margin-top:8px;width:56px;height:3px;background:#CE1126;border-radius:3px;opacity:.9}
-    .card{border:1px solid rgba(255,255,255,0.05);border-radius:var(--radius);padding:22px;background:rgba(20,20,20,0.9);margin-bottom:20px}
+    .card{border:1px solid rgba(255,255,255,0.05);border-radius:var(--radius);padding:22px;background:rgba(20,20,20,0.9);margin-bottom:20px;transition:box-shadow .2s,border .2s}
+    .card:hover{box-shadow:0 4px 24px rgba(206,17,38,0.12);border-color:#CE1126}
     .card h3{margin:0 0 10px;font-size:20px}
     .card p{margin:0 0 10px;color:var(--muted);line-height:1.6}
     .card ul{margin:0 0 12px 18px;color:var(--muted);line-height:1.55}
@@ -197,69 +99,14 @@
     .stars{color:#ffd166;letter-spacing:1px}
     .review-text{color:#c9c9c9;line-height:1.55;margin-top:8px}
     .reviews-nav{display:flex;gap:10px;margin-top:12px}
-    .nav-btn{border:1px solid rgba(255,255,255,.15);background:#111;color:#fff;border-radius:10px;padding:8px 12px;cursor:pointer}
-    .nav-btn:hover{border-color:var(--accent)}
-
-    /* Contact */
-    .contact{display:grid;gap:14px;margin-top:8px}
-    @media(min-width:760px){ .contact{grid-template-columns:repeat(3,1fr)} }
-    .kpi{display:flex;gap:10px;align-items:center}
-    .kpi b{min-width:96px;display:inline-block}
+    .nav-btn{border:1px solid rgba(255,255,255,.15);background:#111;color:#fff;border-radius:10px;padding:8px 12px;cursor:pointer;transition:background .2s,color .2s,border .2s}
+    .nav-btn:hover{border-color:var(--accent);background:#CE1126;color:#fff}
 
     footer{padding:30px 0;border-top:1px solid #1f1f1f;color:#c9c9c9;text-align:center;margin-top:24px}
-    .drop-toggle{position:fixed;right:0;top:40%;transform:translateY(-50%);padding:14px 18px;border-radius:12px 0 0 12px;background:#ffffff;color:#000;font-weight:800;border:1px solid var(--line);border-right:none;cursor:pointer;z-index:1000;writing-mode:vertical-rl;text-orientation:mixed;user-select:none;box-shadow:-4px 4px 16px rgba(0,0,0,.25)}
-    .drop-panel{position:fixed;right:0;top:0;height:100%;width:420px;max-width:92vw;background:#0f0f0f;border-left:1px solid var(--line);box-shadow:-12px 0 28px rgba(0,0,0,.45);padding:24px 22px 26px;z-index:999;transform:translateX(100%);transition:transform .35s ease}
-    .drop-panel[aria-hidden="false"]{transform:none}
-    .drop-close{position:absolute;top:12px;right:12px;background:#141414;border:1px solid #2a2a2a;color:#fff;border-radius:12px;padding:8px 10px;cursor:pointer}
-    .drop-panel .form{display:flex;flex-direction:column;gap:14px;margin-top:8px}
-    .drop-panel .input{background:#0b0b0b;border:1px solid #2a2a2a;border-radius:12px;padding:14px 12px;color:#fff;font-size:15px}
-    .drop-panel .file{background:#0b0b0b;border:1px solid #2a2a2a;border-radius:12px;padding:10px 12px;color:#fff;font-size:15px}
-    .drop-panel .btn-chip{width:100%;padding:13px 16px;border-radius:12px;background:#CE1126;color:#fff;border:none;font-weight:800;letter-spacing:.2px}
-    .drop-panel .hint{color:#bdbdbd;font-size:14px;line-height:1.5}
 
-    /* Luxurious look for hero section */
-    .hero {
-      background: linear-gradient(135deg, #CE1126 0%, #8B0000 100%);
-      box-shadow: 0 8px 32px rgba(0,0,0,0.18);
-      border-bottom-left-radius: 32px;
-      border-bottom-right-radius: 32px;
-    }
-
-    /* Buttons and nav hover */
-    .nav-btn, .drop-close, .btn-chip {
-      transition: background 0.2s, color 0.2s, border 0.2s;
-    }
-    .nav-btn:hover, .drop-close:hover, .btn-chip:hover {
-      background: #CE1126;
-      color: #fff;
-      border-color: #fff;
-    }
-
-    /* Card hover effect */
-    .card {
-      transition: box-shadow 0.2s, border 0.2s;
-    }
-    .card:hover {
-      box-shadow: 0 4px 24px rgba(206,17,38,0.12);
-      border-color: #CE1126;
-    }
-
-    /* Input focus for form */
-    .input:focus, .file:focus {
-      border-color: #CE1126;
-      outline: none;
-      background: #181818;
-    }
-
-    /* Add smooth hover for flags */
-    .flag {
-      transition: background 0.2s, color 0.2s, border 0.2s;
-    }
-    .flag:hover {
-      background: #CE1126;
-      color: #fff;
-      border-color: #CE1126;
-    }
+    /* Buttons */
+    .btn-chip{padding:8px 12px;border-radius:999px;background:#fff;color:#000;font-weight:600;font-size:13px;border:1px solid #fff;transition:background .2s,color .2s,border .2s;display:inline-flex;align-items:center;gap:6px;text-decoration:none}
+    .btn-chip:hover{background:#000;color:#fff;border-color:#000}
   </style>
 </head>
 <body>
@@ -269,7 +116,7 @@
         <img src="logo.png" alt="Oxford Translation Center logo" />
         <strong data-i18n="brand">Oxford Translation Center</strong>
       </div>
-      <!-- Add quick contact buttons here -->
+      <!-- Quick contact buttons -->
       <div style="display:flex;gap:8px;flex-wrap:wrap;">
         <a class="btn-chip" href="https://wa.me/97338361980" target="_blank" rel="noopener">
           <span data-i18n="btn_whatsapp">WhatsApp</span>
@@ -321,7 +168,7 @@
           <li data-i18n="svc1_corp5">Industry‑specific translations (oil & gas, healthcare, IT, engineering).</li>
           <li data-i18n="svc1_corp6">Embassy, chamber, and MOFA attestation for corporate contracts & filings.</li>
         </ul>
-        <p data-i18n="svc1_langs">🌍 Available in Arabic, English, French, German, Russian, Hindi, and Chinese & more Languages — trusted by courts, embassies, and regulators across the GCC.</p>
+        <p data-i18n="svc1_langs">🌍 Available in Arabic, English, French, German, Russian, Hindi, Chinese — and over 50 other languages. — trusted by courts, embassies, and regulators across the GCC.</p>
       </article>
     </section>
 
@@ -371,61 +218,44 @@
       </div>
     </section>
 
-    <!-- Contact -->
+    <!-- Contact (NO FILE UPLOADS) -->
     <section class="section container" id="contact" aria-label="Contact">
       <h2 data-i18n="contact_head">Contact</h2>
-      <div class="contact">
+      <div class="contact" style="display:grid;gap:14px;margin-top:8px">
         <div class="card">
-          <div class="kpi">
-            <b data-i18n="whatsapp_label">WhatsApp</b>
+          <div class="kpi" style="display:flex;gap:10px;align-items:center">
+            <b data-i18n="whatsapp_label" style="min-width:96px;display:inline-block">WhatsApp</b>
             <a href="https://wa.me/97338361980" target="_blank" rel="noopener">+973 3836 1980</a>
           </div>
-          <div class="kpi">
-            <b data-i18n="resp_label">Response</b>
+          <div class="kpi" style="display:flex;gap:10px;align-items:center">
+            <b data-i18n="resp_label" style="min-width:96px;display:inline-block">Response</b>
             <span data-i18n="resp_val">Quotes within hours</span>
           </div>
-          <!-- Added quick contact buttons below -->
-          <div style="margin-top:12px;display:flex;gap:10px;">
-            </a>
+          <div style="margin-top:12px;display:flex;gap:10px;flex-wrap:wrap">
+            <a class="btn-chip" href="mailto:oxfordbah@gmail.com">Email us</a>
+            <a class="btn-chip" href="https://wa.me/97338361980" target="_blank" rel="noopener">Chat on WhatsApp</a>
           </div>
         </div>
         <div class="card">
-          <div class="kpi">
-            <b data-i18n="phone_label">Phone</b>
+          <div class="kpi" style="display:flex;gap:10px;align-items:center">
+            <b data-i18n="phone_label" style="min-width:96px;display:inline-block">Phone</b>
             <a href="tel:+97334416262">+973 3441 6262</a>
           </div>
-          <div class="kpi">
-            <b data-i18n="email_label">Email</b>
+          <div class="kpi" style="display:flex;gap:10px;align-items:center">
+            <b data-i18n="email_label" style="min-width:96px;display:inline-block">Email</b>
             <a href="mailto:oxfordbah@gmail.com">oxfordbah@gmail.com</a>
           </div>
         </div>
         <div class="card">
-          <div class="kpi">
-            <b data-i18n="loc_label">Location</b>
+          <div class="kpi" style="display:flex;gap:10px;align-items:center">
+            <b data-i18n="loc_label" style="min-width:96px;display:inline-block">Location</b>
             <span data-i18n="loc_val">Manama, Bahrain</span>
           </div>
-          <div class="kpi">
-            <b data-i18n="hrs_label">Hours</b>
+          <div class="kpi" style="display:flex;gap:10px;align-items:center">
+            <b data-i18n="hrs_label" style="min-width:96px;display:inline-block">Hours</b>
             <span data-i18n="hrs_val">Sun–Thu, 9:00–18:00</span>
           </div>
         </div>
-        <!-- Updated FormSubmit form as requested -->
-        <form action="https://formsubmit.co/oxfordbah@gmail.com"
-              method="POST"
-              enctype="multipart/form-data">
-
-          <!-- FormSubmit options -->
-          <input type="hidden" name="_captcha" value="false">
-          <input type="hidden" name="_subject" value="New file from Oxford website">
-          <input type="hidden" name="_template" value="table">
-          <input type="hidden" name="_next" value="https://navazkhalid786-spec.github.io/oxfordP/?sent#thanks">
-
-          <input class="input" type="email" name="email" placeholder="Your email" required>
-          <input class="input" type="tel" name="phone" placeholder="Phone / WhatsApp (optional)">
-          <input class="file" type="file" name="files" accept=".pdf,.jpg,.jpeg,.png,.doc,.docx" multiple required>
-
-          <button class="btn-chip" type="submit">Send</button>
-        </form>
       </div>
     </section>
   </main>
@@ -434,22 +264,8 @@
     <div class="container" data-i18n="footer">© Oxford Translation Center — Premium Translation & Business Consultancy</div>
   </footer>
 
-  <!-- Side Drop: Quick Quote -->
-  <div id="drop-toggle" class="drop-toggle" aria-controls="drop-panel" aria-expanded="false" data-i18n="drop_toggle">Drop your document</div>
-  <aside id="drop-panel" class="drop-panel" aria-hidden="true" aria-label="Quick quote form">
-    <button type="button" class="drop-close" aria-label="Close">✕</button>
-    <form class="form" action="#" method="POST" enctype="multipart/form-data">
-      <h3 style="margin:0 0 8px" data-i18n="drop_head">Quick Quote</h3>
-      <input class="input" type="email" name="email" data-ph="drop_email" placeholder="Your email" required>
-      <input class="input" type="tel" name="phone" data-ph="drop_phone" placeholder="Phone / WhatsApp (optional)">
-      <input class="file" type="file" name="file" accept=".pdf,.jpg,.jpeg,.png,.doc,.docx" multiple required>
-      <button class="btn-chip" type="submit"><span data-i18n="drop_send">Send</span></button>
-      <p class="hint" style="margin:8px 0 0" data-i18n="drop_hint">We reply with <b>quotes within hours</b>. Files kept confidential.</p>
-    </form>
-  </aside>
-
   <script>
-    // i18n dictionaries
+    // i18n dictionaries (unchanged keys except for drop-panel strings removed)
     const T = {
       en: {
         brand:"Oxford Translation Center",
@@ -489,10 +305,7 @@
         contact_head:"Contact", whatsapp_label:"WhatsApp", phone_label:"Phone", email_label:"Email",
         loc_label:"Location", loc_val:"Manama, Bahrain", hrs_label:"Hours", hrs_val:"Sun–Thu, 9:00–18:00",
         resp_label:"Response", resp_val:"Quotes within hours",
-        footer:"© Oxford Translation Center — Premium Translation & Business Consultancy",
-        drop_toggle:"Drop your document", drop_head:"Quick Quote",
-        drop_email:"Your email", drop_phone:"Phone / WhatsApp (optional)",
-        drop_send:"Send", drop_hint:"We reply with <b>quotes within hours</b>. Files kept confidential."
+        footer:"© Oxford Translation Center — Premium Translation & Business Consultancy"
       },
       ar: {
         brand:"مركز أوكسفورد للترجمة",
@@ -530,10 +343,7 @@
         contact_head:"تواصل معنا", whatsapp_label:"واتساب", phone_label:"الهاتف", email_label:"البريد الإلكتروني",
         loc_label:"الموقع", loc_val:"المنامة، البحرين", hrs_label:"الساعات", hrs_val:"الأحد–الخميس، 9:00–18:00",
         resp_label:"الرد", resp_val:"عروض أسعار خلال ساعات",
-        footer:"© مركز أوكسفورد للترجمة — حلول ترجمة واستشارات أعمال",
-        drop_toggle:"أرسل مستندك", drop_head:"عرض سعر سريع",
-        drop_email:"بريدك الإلكتروني", drop_phone:"الهاتف / واتساب (اختياري)",
-        drop_send:"إرسال", drop_hint:"نردّ <b>بعروض أسعار خلال ساعات</b>. تُحفظ الملفات بسرية تامة."
+        footer:"© مركز أوكسفورد للترجمة — حلول ترجمة واستشارات أعمال"
       },
       fr: {
         brand:"Centre de Traduction Oxford",
@@ -571,10 +381,7 @@
         contact_head:"Contact", whatsapp_label:"WhatsApp", phone_label:"Téléphone", email_label:"E‑mail",
         loc_label:"Localisation", loc_val:"Manama, Bahreïn", hrs_label:"Horaires", hrs_val:"Dim–Jeu, 9:00–18:00",
         resp_label:"Réponse", resp_val:"Devis sous quelques heures",
-        footer:"© Centre de Traduction Oxford — Traduction Premium & Conseil",
-        drop_toggle:"Déposez votre document", drop_head:"Devis rapide",
-        drop_email:"Votre e‑mail", drop_phone:"Téléphone / WhatsApp (optionnel)",
-        drop_send:"Envoyer", drop_hint:"Réponse avec <b>devis sous quelques heures</b>. Fichiers confidentiels."
+        footer:"© Centre de Traduction Oxford — Traduction Premium & Conseil"
       }
     };
 
@@ -618,22 +425,6 @@
         prev?.addEventListener('click',()=> row.scrollBy({left:-step(),behavior:'smooth'}));
         next?.addEventListener('click',()=> row.scrollBy({left: step(),behavior:'smooth'}));
       }
-    })();
-
-    // Drop panel toggle
-    (function(){
-      const toggleBtn=document.getElementById('drop-toggle');
-      const panel=document.getElementById('drop-panel');
-      const close=document.querySelector('.drop-close');
-      if(!toggleBtn||!panel) return;
-      const toggle=()=>{
-        const open = panel.getAttribute('aria-hidden') === 'false';
-        panel.setAttribute('aria-hidden', open ? 'true' : 'false');
-        toggleBtn.setAttribute('aria-expanded', open ? 'false' : 'true');
-        panel.style.transform = open ? 'translateX(100%)' : 'translateX(0)';
-      };
-      toggleBtn.addEventListener('click', toggle);
-      close?.addEventListener('click', toggle);
     })();
   </script>
 </body>
