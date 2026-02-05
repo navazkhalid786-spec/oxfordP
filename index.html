@@ -52,11 +52,30 @@
     a{color:var(--accent); text-decoration:none}
     .container{max-width:1200px;margin:0 auto;padding:28px}
 
-    /* Header */
-    header.header{position:sticky;top:0;background:#000;border-bottom:1px solid var(--line);z-index:20}
+  /* Header */
+  header.header{position:sticky;top:0;background:#fff;border-bottom:1px solid rgba(0,0,0,0.08);z-index:20;color:#111}
+  /* Adjustments for white header so controls remain visible */
+  header.header .brand strong{color:#111}
+  header.header .brand img{filter:none}
+  header.header .btn-chip{background:transparent;color:#111;border:1px solid rgba(0,0,0,0.12)}
+  header.header .btn-chip:hover{background:var(--accent);color:#fff;border-color:var(--accent)}
+  header.header .flag{background:#fff;border:1px solid rgba(0,0,0,0.08);color:#111}
+  header.header .flag.active{background:var(--accent);color:#fff;border-color:var(--accent)}
+  header.header .flag:hover{background:var(--accent);color:#fff;border-color:var(--accent)}
     .header-inner{display:flex;align-items:center;justify-content:space-between;gap:14px}
     .brand{display:flex;align-items:center;gap:12px}
     .brand img{height:46px;width:auto}
+  /* Make the brand title a bit larger and use Palatino if available */
+  .brand strong{ font-family: "Palatino Linotype", "Palatino", "Palatino LT STD", "Times New Roman", serif; font-weight:700; font-size:clamp(18px,2.2vw,22px); color:#111; }
+  /* For Arabic pages, use the same font family as the content (Cairo) so the brand title matches body text */
+  body[lang="ar"] .brand strong,
+  html[lang="ar"] .brand strong {
+    font-family: 'Cairo', sans-serif;
+    font-weight:700;
+    font-size:clamp(18px,2.2vw,22px);
+    color:#111;
+    letter-spacing: 0;
+  }
     nav.flags{display:flex;gap:8px}
     .flag{height:28px;min-width:42px;border-radius:6px;background:#fff;border:1px solid #fff;cursor:pointer;padding:2px 8px}
     .flag.active{background:var(--accent);color:#fff;border-color:var(--accent)}
@@ -206,7 +225,14 @@
     .kpi{display:flex;gap:10px;align-items:center}
     .kpi b{min-width:96px;display:inline-block}
 
-    footer{padding:30px 0;border-top:1px solid #1f1f1f;color:#c9c9c9;text-align:center;margin-top:24px}
+  footer{padding:30px 0;border-top:1px solid #1f1f1f;color:#c9c9c9;text-align:center;margin-top:24px}
+  /* Footer layout and social icon styles */
+  .footer-inner{display:flex;align-items:center;justify-content:space-between;gap:18px}
+  @media(max-width:600px){ .footer-inner{flex-direction:column;align-items:center;text-align:center} }
+  .socials{display:flex;gap:12px;align-items:center}
+  .social-link{color:#bdbdbd;display:inline-flex;align-items:center;justify-content:center;width:36px;height:36px;border-radius:8px;border:1px solid rgba(255,255,255,0.03);transition:color .18s ease,transform .12s ease,background .12s ease,border-color .12s ease}
+  .social-link:hover{color:var(--accent);transform:translateY(-3px);border-color:var(--accent);background:rgba(206,17,38,0.04)}
+  .social-icon{width:20px;height:20px}
     .drop-toggle{position:fixed;right:0;top:40%;transform:translateY(-50%);padding:14px 18px;border-radius:12px 0 0 12px;background:#ffffff;color:#000;font-weight:800;border:1px solid var(--line);border-right:none;cursor:pointer;z-index:1000;writing-mode:vertical-rl;text-orientation:mixed;user-select:none;box-shadow:-4px 4px 16px rgba(0,0,0,.25)}
     .drop-panel{position:fixed;right:0;top:0;height:100%;width:420px;max-width:92vw;background:#0f0f0f;border-left:1px solid var(--line);box-shadow:-12px 0 28px rgba(0,0,0,.45);padding:24px 22px 26px;z-index:999;transform:translateX(100%);transition:transform .35s ease}
     .drop-panel[aria-hidden="false"]{transform:none}
@@ -214,6 +240,13 @@
     .drop-panel .form{display:flex;flex-direction:column;gap:14px;margin-top:8px}
     .drop-panel .input{background:#0b0b0b;border:1px solid #2a2a2a;border-radius:12px;padding:14px 12px;color:#fff;font-size:15px}
     .drop-panel .file{background:#0b0b0b;border:1px solid #2a2a2a;border-radius:12px;padding:10px 12px;color:#fff;font-size:15px}
+  /* Custom file input: hide native filename text and show a clean button */
+  .custom-file{display:inline-flex;align-items:center;gap:12px}
+  .custom-file.dragover{outline:2px dashed var(--accent);background:rgba(206,17,38,0.03);border-radius:12px}
+  .custom-file .file-btn{background:#fff;color:#000;padding:8px 12px;border-radius:12px;font-weight:700;border:1px solid rgba(0,0,0,0.06);cursor:pointer}
+  .custom-file .file-input{position:absolute!important;opacity:0!important;pointer-events:auto;left:0;top:0;width:100%;height:100%}
+  /* Ensure any existing .file class doesn't display its default UI */
+  input[type="file"].file{color:transparent}
     .drop-panel .btn-chip{width:100%;padding:13px 16px;border-radius:12px;background:#CE1126;color:#fff;border:none;font-weight:800;letter-spacing:.2px}
     .drop-panel .hint{color:#bdbdbd;font-size:14px;line-height:1.5}
 
@@ -281,6 +314,7 @@
       <nav class="flags" aria-label="Language selector">
         <button class="flag" data-lang="en" aria-label="English">EN</button>
         <button class="flag" data-lang="ar" aria-label="العربية">AR</button>
+        <button class="flag" data-lang="es" aria-label="Español">ES</button>
         <button class="flag" data-lang="fr" aria-label="Français">FR</button>
       </nav>
     </div>
@@ -409,44 +443,69 @@
             <span data-i18n="hrs_val">Sun–Thu, 9:00–18:00</span>
           </div>
         </div>
-        <!-- Updated FormSubmit form as requested -->
-        <form action="https://formsubmit.co/oxfordbah@gmail.com"
-              method="POST"
-              enctype="multipart/form-data">
-
-          <!-- FormSubmit options -->
-          <input type="hidden" name="_captcha" value="false">
-          <input type="hidden" name="_subject" value="New file from Oxford website">
-          <input type="hidden" name="_template" value="table">
-          <input type="hidden" name="_next" value="https://navazkhalid786-spec.github.io/oxfordP/?sent#thanks">
-
-          <input class="input" type="email" name="email" placeholder="Your email" required>
-          <input class="input" type="tel" name="phone" placeholder="Phone / WhatsApp (optional)">
-          <input class="file" type="file" name="files" accept=".pdf,.jpg,.jpeg,.png,.doc,.docx" multiple required>
-
-          <button class="btn-chip" type="submit">Send</button>
-        </form>
+        <!-- Contact form removed — submissions are handled via the drop-panel quick-quote form -->
       </div>
     </section>
   </main>
 
   <footer role="contentinfo">
-    <div class="container" data-i18n="footer">© Oxford Translation Center — Premium Translation & Business Consultancy</div>
+    <div class="container">
+      <div class="footer-inner">
+        <div class="footer-copy" data-i18n="footer">© Oxford Translation Center — Premium Translation & Business Consultancy</div>
+        <div class="socials" aria-label="Social links">
+          <a class="social-link" href="https://www.instagram.com/oxford.bh?igsh=MWlxaDlnYzVuM2lo&utm_source=qr" target="_blank" rel="noopener" aria-label="Instagram">
+            <!-- Instagram SVG -->
+            <svg class="social-icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+              <rect x="2" y="2" width="20" height="20" rx="5" stroke="currentColor" stroke-width="1.4"/>
+              <path d="M16 11.99a3 3 0 11-6 0 3 3 0 016 0z" stroke="currentColor" stroke-width="1.4"/>
+              <circle cx="17.5" cy="6.5" r="0.8" fill="currentColor"/>
+            </svg>
+          </a>
+          <a class="social-link" href="https://www.facebook.com/share/1BDQrKASYB/?mibextid=wwXIfr" target="_blank" rel="noopener" aria-label="Facebook">
+            <!-- Facebook SVG -->
+            <svg class="social-icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+              <path d="M18 2h-3a4 4 0 00-4 4v3H8v4h3v8h4v-8h3l1-4h-4V6a1 1 0 011-1h2V2z" stroke="currentColor" stroke-width="1.2" fill="none"/>
+            </svg>
+          </a>
+          <a class="social-link" href="https://www.linkedin.com/in/oxfordbh" target="_blank" rel="noopener" aria-label="LinkedIn">
+            <!-- LinkedIn SVG -->
+            <svg class="social-icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+              <rect x="2" y="2" width="20" height="20" rx="2" stroke="currentColor" stroke-width="1.2" fill="none"/>
+              <path d="M7.5 10.5v7" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/>
+              <path d="M7.5 8.5a1 1 0 110-2 1 1 0 010 2z" stroke="currentColor" stroke-width="1.4"/>
+              <path d="M12.5 10.5v1.6c0 .9 0 5.4 5 5.4v-6.2c0-3.4-1.8-4.8-4.2-4.8-1.6 0-2.8.9-3.8 1.8" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/>
+            </svg>
+          </a>
+        </div>
+      </div>
+    </div>
   </footer>
 
   <!-- Side Drop: Quick Quote -->
   <div id="drop-toggle" class="drop-toggle" aria-controls="drop-panel" aria-expanded="false" data-i18n="drop_toggle">Drop your document</div>
-  <aside id="drop-panel" class="drop-panel" aria-hidden="true" aria-label="Quick quote form">
+    <aside id="drop-panel" class="drop-panel" aria-hidden="true" aria-label="Quick quote form">
     <button type="button" class="drop-close" aria-label="Close">✕</button>
-    <form class="form" action="#" method="POST" enctype="multipart/form-data">
+    <!-- Use FormSubmit AJAX endpoint so we can handle submission client-side and avoid redirects -->
+    <form id="dropForm" class="form" action="https://formsubmit.co/ajax/oxfordbah@gmail.com" method="POST" enctype="multipart/form-data">
+      <!-- FormSubmit options (moved here so only drop-panel submits) -->
+      <input type="hidden" name="_captcha" value="false">
+      <input type="hidden" name="_subject" value="New file from Oxford website">
+      <input type="hidden" name="_template" value="table">
       <h3 style="margin:0 0 8px" data-i18n="drop_head">Quick Quote</h3>
       <input class="input" type="email" name="email" data-ph="drop_email" placeholder="Your email" required>
       <input class="input" type="tel" name="phone" data-ph="drop_phone" placeholder="Phone / WhatsApp (optional)">
-      <input class="file" type="file" name="file" accept=".pdf,.jpg,.jpeg,.png,.doc,.docx" multiple required>
-      <button class="btn-chip" type="submit"><span data-i18n="drop_send">Send</span></button>
-      <p class="hint" style="margin:8px 0 0" data-i18n="drop_hint">We reply with <b>quotes within hours</b>. Files kept confidential.</p>
+      <label class="custom-file" style="position:relative">
+        <span class="file-btn">Choose Files</span>
+        <input class="file file-input" id="dropFiles" type="file" name="files" accept=".pdf,.jpg,.jpeg,.png,.doc,.docx" multiple required>
+      </label>
+      <button class="btn-chip" id="dropSendBtn" type="submit"><span data-i18n="drop_send">Send</span></button>
+      <span id="dropFormStatus" style="margin-left:12px;color:#bdbdbd;font-weight:700;display:inline-block"></span>
+      <p id="dropHint" class="hint" style="margin:8px 0 0;color:#bdbdbd" data-i18n="drop_hint">We reply with <b>quotes within hours</b>. Files kept confidential.</p>
     </form>
   </aside>
+
+  <!-- Success toast (hidden by default) -->
+  <div id="formSuccessToast" style="position:fixed;left:50%;top:18%;transform:translateX(-50%);background:#0f0f0f;color:#fff;padding:14px 18px;border-radius:12px;border:2px solid rgba(255,255,255,0.06);box-shadow:0 6px 30px rgba(0,0,0,0.5);display:none;z-index:2000;font-weight:700;"></div>
 
   <script>
     // i18n dictionaries
@@ -575,6 +634,47 @@
         drop_toggle:"Déposez votre document", drop_head:"Devis rapide",
         drop_email:"Votre e‑mail", drop_phone:"Téléphone / WhatsApp (optionnel)",
         drop_send:"Envoyer", drop_hint:"Réponse avec <b>devis sous quelques heures</b>. Fichiers confidentiels."
+      },
+      es: {
+        brand:"Centro de Traducción Oxford",
+        hero_title:"Traducciones Certificadas Premium",
+        hero_sub:"Traducción legal, comercial y técnica — además de consultoría empresarial de alto nivel para Baréin y el CCG.",
+        badge1:"Precisión válida en tribunales", badge2:"Entrega rápida", badge3:"Confidencialidad 100%",
+        services_head:"Qué ofrecemos",
+        svc1_title:"Traducción Certificada y Atestación",
+        svc1_p:"Ofrecemos traducciones certificadas aceptadas por tribunales para particulares y organizaciones, garantizando precisión, confidencialidad y aceptación por las autoridades oficiales.",
+        svc1_ind_title:"Para particulares",
+        svc1_ind1:"Traducciones certificadas y notarizadas de certificados (nacimiento, matrimonio, estudios, médicos).",
+        svc1_ind2:"Atestación por embajadas y Ministerio de Asuntos Exteriores para documentos personales y educativos.",
+        svc1_ind3:"Corrección y edición de declaraciones personales, solicitudes y declaraciones juradas.",
+        svc1_ind4:"Plazos rápidos para presentaciones urgentes a embajadas, ministerios y tribunales.",
+        svc1_corp_title:"Para empresas",
+        svc1_corp1:"Traducción de contratos, acuerdos de accionistas y NDAs.",
+        svc1_corp2:"Documentos de gobernanza corporativa (estatutos, resoluciones del consejo, registros).",
+        svc1_corp3:"Informes financieros y de auditoría, cuentas anuales y declaraciones fiscales.",
+        svc1_corp4:"Manuales de RRHH, políticas y contratos laborales.",
+        svc1_corp5:"Traducciones específicas por industria (petróleo y gas, salud, TI, ingeniería).",
+        svc1_corp6:"Atestaciones de embajadas, cámaras y MAE para contratos e inscripciones corporativas.",
+        svc1_langs:"🌍 Disponible en árabe, inglés, francés, alemán, ruso, hindi, chino — y más de 50 idiomas. — confiable para tribunales, embajadas y reguladores en el GCC.",
+        consult_head:"Consultoría Empresarial",
+        consult_intro:"Asesoría de alto nivel para particulares, pymes y corporaciones que buscan expansión y cumplimiento en Baréin y el GCC.",
+        consult_li1:"Entrada al mercado y estructuración de entidades (WLL, sucursales, sociedades holding).",
+        consult_li2:"Cumplimiento regulatorio y gobernanza (MOIC, LMRA, NPRA, IVA).",
+        consult_li3:"Estructuración de capital, eficiencia fiscal y estrategias de expansión en el GCC.",
+        consult_li4:"Secretaría corporativa, atestaciones y validación internacional.",
+        reviews_head:"Opiniones de clientes", reviews_cta:"Ver todo en Google",
+        rev1:"Personal muy profesional… me ayudaron a resolver todo lo antes posible. ¡Gracias!",
+        rev2:"Trabajo urgente de más de 50 páginas. Oxford superó las expectativas y entregó antes de la fecha. Rápido, eficiente y rentable.",
+        rev3:"Gran equipo. Respuesta rápida y fácil comunicación.",
+        rev4:"Servicio excelente.",
+        ago_7m:"hace 7 meses", ago_4y:"hace 4 años", ago_2y:"hace 2 años", ago_1y:"hace 1 año",
+        contact_head:"Contacto", whatsapp_label:"WhatsApp", phone_label:"Teléfono", email_label:"Correo electrónico",
+        loc_label:"Ubicación", loc_val:"Manama, Baréin", hrs_label:"Horario", hrs_val:"Dom–Jue, 9:00–18:00",
+        resp_label:"Respuesta", resp_val:"Presupuestos en horas",
+        footer:"© Centro de Traducción Oxford — Traducción Premium & Consultoría Empresarial",
+        drop_toggle:"Envía tu documento", drop_head:"Presupuesto rápido",
+        drop_email:"Tu correo", drop_phone:"Teléfono / WhatsApp (opcional)",
+        drop_send:"Enviar", drop_hint:"Respondemos con <b>presupuestos en pocas horas</b>. Archivos confidenciales."
       }
     };
 
@@ -608,6 +708,9 @@
       });
     });
 
+  // Store dropped files here as a fallback when setting input.files is blocked by the browser
+  let __droppedFiles = null;
+
     // Testimonials scroll
     (function(){
       const row = document.getElementById('reviewsRow');
@@ -619,6 +722,160 @@
         next?.addEventListener('click',()=> row.scrollBy({left: step(),behavior:'smooth'}));
       }
     })();
+
+    // Handle drop-panel form with AJAX so user stays on the page and sees inline feedback
+    document.addEventListener('DOMContentLoaded', function(){
+      try{
+        const form = document.getElementById('dropForm');
+  const statusEl = document.getElementById('dropFormStatus');
+  const hintEl = document.getElementById('dropHint');
+  const sendBtn = document.getElementById('dropSendBtn');
+  const fileInput = document.getElementById('dropFiles');
+  // Preserve the initial hint so we can restore it after reset
+  const initialHint = hintEl ? hintEl.innerHTML : '';
+
+        // Show selected file count (small) next to the button
+        function updateFileLabel(){
+          if(!statusEl) return;
+          const n = (fileInput && fileInput.files && fileInput.files.length) ? fileInput.files.length : (Array.isArray(__droppedFiles) ? __droppedFiles.length : 0);
+          statusEl.textContent = n ? (n + (n===1 ? ' file selected' : ' files selected')) : '';
+        }
+        if(fileInput) fileInput.addEventListener('change', updateFileLabel);
+        updateFileLabel();
+
+        // --- Drag & drop support ---
+        // Allow dropping files onto the custom-file area and the whole panel.
+        // When files are dropped we set them onto the hidden file input using DataTransfer
+        // and update the file label so users see the count.
+        const customFile = document.querySelector('.custom-file');
+        if(customFile && fileInput){
+          ['dragenter','dragover'].forEach(evt=> customFile.addEventListener(evt, e=>{
+            e.preventDefault(); e.stopPropagation();
+            customFile.classList.add('dragover');
+            try{ if(e.dataTransfer) e.dataTransfer.dropEffect = 'copy'; }catch(e){}
+          }));
+
+          ['dragleave','dragend'].forEach(evt=> customFile.addEventListener(evt, e=>{
+            e.preventDefault(); e.stopPropagation();
+            customFile.classList.remove('dragover');
+          }));
+
+          customFile.addEventListener('drop', function(e){
+            e.preventDefault(); e.stopPropagation();
+            customFile.classList.remove('dragover');
+            const dt = e.dataTransfer;
+            if(dt && dt.files && dt.files.length){
+              try{
+                // Attempt to set input.files (works in many browsers)
+                const d = new DataTransfer();
+                for(let i=0;i<dt.files.length;i++) d.items.add(dt.files[i]);
+                fileInput.files = d.files;
+                __droppedFiles = null;
+              }catch(err){
+                // Some browsers block programmatic assignment to input.files — keep files in memory instead
+                __droppedFiles = Array.from(dt.files);
+                console.warn('Storing dropped files in memory (input.files assignment blocked)', err);
+              }
+              updateFileLabel();
+            }
+          });
+
+          // Also allow dropping onto the entire panel area for convenience
+          const panelEl = document.getElementById('drop-panel');
+          if(panelEl){
+            panelEl.addEventListener('dragover', function(e){ e.preventDefault(); e.stopPropagation(); try{ if(e.dataTransfer) e.dataTransfer.dropEffect = 'copy'; }catch(e){} panelEl.classList.add('dragover'); });
+            panelEl.addEventListener('dragleave', function(e){ e.preventDefault(); e.stopPropagation(); panelEl.classList.remove('dragover'); });
+            panelEl.addEventListener('drop', function(e){
+              e.preventDefault(); e.stopPropagation(); panelEl.classList.remove('dragover');
+              const dt = e.dataTransfer;
+              if(dt && dt.files && dt.files.length){
+                try{
+                  const d = new DataTransfer();
+                  for(let i=0;i<dt.files.length;i++) d.items.add(dt.files[i]);
+                  fileInput.files = d.files;
+                  __droppedFiles = null;
+                }catch(err){
+                  __droppedFiles = Array.from(dt.files);
+                  console.warn('Storing dropped files in memory (input.files assignment blocked)', err);
+                }
+                updateFileLabel();
+              }
+            });
+          }
+        }
+
+        if(form){
+          form.addEventListener('submit', function(ev){
+            ev.preventDefault();
+            if(!form.checkValidity()){
+              form.reportValidity();
+              return;
+            }
+            if(sendBtn) { sendBtn.disabled = true; sendBtn.style.opacity = '0.7'; }
+            if(statusEl) { statusEl.style.color = '#bdbdbd'; statusEl.textContent = ''; }
+            if(hintEl){ hintEl.style.color = '#bdbdbd'; hintEl.textContent = 'Submitting...'; }
+
+            const fd = new FormData(form);
+            // If the browser prevented setting input.files, append any dropped files stored in __droppedFiles
+            if((!fileInput || !fileInput.files || fileInput.files.length === 0) && Array.isArray(__droppedFiles) && __droppedFiles.length){
+              __droppedFiles.forEach(f => fd.append('files', f));
+            }
+
+            fetch(form.action, { method: 'POST', body: fd, headers: { 'Accept': 'application/json' } })
+              .then(resp => {
+                if(!resp.ok) throw resp;
+                return resp.json().catch(()=>({ok:true}));
+              })
+              .then(() => {
+                // Small inline confirmation near the form
+                // Show final message in the hint area and keep inputs disabled
+                if(hintEl){ hintEl.style.color = 'var(--accent)'; hintEl.innerHTML = 'Submission completed — we will contact you asap.'; }
+                if(statusEl){ statusEl.textContent = ''; }
+                if(sendBtn){
+                  // store original text and show a submitted state
+                  sendBtn.dataset.origText = sendBtn.innerHTML || 'Send';
+                  sendBtn.disabled = true;
+                  sendBtn.innerHTML = 'Submitted ✓';
+                  sendBtn.style.opacity = '0.95';
+                }
+                if(fileInput){ fileInput.disabled = true; }
+
+                // After a short delay close the panel and reset the form so it doesn't remain stuck
+                setTimeout(() => {
+                  try{
+                    const panel = document.getElementById('drop-panel');
+                    const toggle = document.getElementById('drop-toggle');
+                    if(panel){
+                      panel.setAttribute('aria-hidden','true');
+                      panel.style.transform = 'translateX(100%)';
+                    }
+                    if(toggle){ toggle.setAttribute('aria-expanded','false'); }
+
+                    // Reset the form to allow a fresh submission
+                    form.reset();
+                    if(sendBtn){
+                      sendBtn.disabled = false;
+                      sendBtn.innerHTML = sendBtn.dataset.origText || 'Send';
+                      sendBtn.style.opacity = '1';
+                    }
+                    if(fileInput){ fileInput.disabled = false; }
+                    if(hintEl){ hintEl.style.color = '#bdbdbd'; hintEl.innerHTML = initialHint; }
+                    // clear status label
+                    if(statusEl){ statusEl.textContent = ''; }
+                  }catch(e){ console.error('reset after submit failed', e); }
+                }, 3000);
+              })
+              .catch(err => {
+                // Show a concise error message inline
+                if(hintEl){ hintEl.style.color = '#ff6666'; hintEl.textContent = 'Submission failed — please try again.'; }
+                if(statusEl){ statusEl.textContent = ''; }
+                if(sendBtn){ sendBtn.disabled = false; sendBtn.style.opacity = '1'; }
+                console.error('FormSubmit AJAX error', err);
+              });
+          });
+        }
+      }catch(e){ console.error(e); }
+    });
 
     // Drop panel toggle
     (function(){
@@ -635,6 +892,54 @@
       toggleBtn.addEventListener('click', toggle);
       close?.addEventListener('click', toggle);
     })();
+
+    // Safety fallback: ensure the dropForm submit handler is attached even if earlier init failed
+    document.addEventListener('DOMContentLoaded', function(){
+      try{
+        const form = document.getElementById('dropForm');
+        if(!form) return;
+        // If an init marker exists, assume the main handler attached successfully
+        if(form.dataset.oxAjaxInit) return;
+        form.dataset.oxAjaxInit = '1';
+
+        const statusEl = document.getElementById('dropFormStatus');
+        const hintEl = document.getElementById('dropHint');
+        const sendBtn = document.getElementById('dropSendBtn');
+
+        form.addEventListener('submit', function(ev){
+          ev.preventDefault();
+          try{
+            if(!form.checkValidity()) { form.reportValidity(); return; }
+            if(sendBtn){ sendBtn.disabled = true; sendBtn.style.opacity = '0.7'; }
+            if(hintEl){ hintEl.style.color = '#bdbdbd'; hintEl.textContent = 'Submitting...'; }
+
+            const fd = new FormData(form);
+            // If input.files is empty, include any dropped files we stored earlier
+            if((!fileInput || !fileInput.files || fileInput.files.length === 0) && Array.isArray(__droppedFiles) && __droppedFiles.length){
+              __droppedFiles.forEach(f => fd.append('files', f));
+            }
+
+            fetch(form.action, { method: 'POST', body: fd, headers: { 'Accept': 'application/json' } })
+              .then(resp=>{
+                if(!resp.ok) throw resp;
+                return resp.json().catch(()=>({ok:true}));
+              })
+              .then(()=>{
+                if(hintEl){ hintEl.style.color = 'var(--accent)'; hintEl.innerHTML = 'Submission completed — we will contact you asap.'; }
+                if(sendBtn){ sendBtn.dataset.origText = sendBtn.innerHTML || 'Send'; sendBtn.disabled = true; sendBtn.innerHTML = 'Submitted ✓'; sendBtn.style.opacity = '0.95'; }
+                setTimeout(()=>{
+                  try{ form.reset(); if(sendBtn){ sendBtn.disabled = false; sendBtn.innerHTML = sendBtn.dataset.origText || 'Send'; sendBtn.style.opacity = '1'; } if(hintEl){ hintEl.style.color = '#bdbdbd'; hintEl.innerHTML = hintEl.dataset.orig || 'We reply with <b>quotes within hours</b>. Files kept confidential.'; } }catch(e){ console.error(e); }
+                }, 2500);
+              })
+              .catch(err=>{
+                console.error('Fallback form submit failed', err);
+                if(hintEl){ hintEl.style.color = '#ff6666'; hintEl.textContent = 'Submission failed — please try again.'; }
+                if(sendBtn){ sendBtn.disabled = false; sendBtn.style.opacity = '1'; }
+              });
+          }catch(e){ console.error('Fallback submit handler error', e); }
+        });
+      }catch(e){ console.error('Failed to attach fallback submit handler', e); }
+    });
   </script>
 </body>
 </html>
